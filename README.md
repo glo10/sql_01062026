@@ -1,6 +1,6 @@
 # Maîtriser le SQL
 
-<!-- 
+
 ## Google Forms
 
 1. Le rythme de la formation vous convient il ?
@@ -19,7 +19,7 @@ notions avant de poursuivre son cours la demi-journée suivante ? si oui, listez
 4. Les notions abordées sur cette demi-journée sont-elles acquises ?
 Auto-éval avec une note entre 1 et 5
 
-5. Commentaires (champ libre) ? -->
+5. Commentaires (champ libre) ?
 
 ---
 
