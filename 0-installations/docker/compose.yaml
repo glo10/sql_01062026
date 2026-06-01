@@ -1,0 +1,135 @@
+# ONLY FOR LOCAL/DEV ENV
+services:
+  mysql8:
+    image: mysql:8
+    container_name: "${PROJECT_NAME}-mysql-v8"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-northwind}
+    restart: unless-stopped
+  mysql57:
+    image: mysql:5.7
+    container_name: "${PROJECT_NAME}-mysql-v57"
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p${MYSQL_ROOT_PASSWORD}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-root}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-northwind}
+    restart: unless-stopped
+  mariadb:
+    image: mariadb:latest
+    container_name: "${PROJECT_NAME}-mariadb"
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_ROOT_PASSWORD:-root}
+      MARIADB_USER: ${MARIADB_USER:-northwind}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-northwind}
+    restart: unless-stopped
+  oracle:
+    image: gvenzl/oracle-free
+    container_name: "${PROJECT_NAME}-oracle"
+    environment:
+      APP_USER: ${APP_USER:-northwind}
+      APP_USER_PASSWORD: ${APP_USER_PASSWORD:-Admin123456!}
+      ORACLE_PASSWORD: ${ORACLE_PASSWORD:-Admin123456!}
+    restart: unless-stopped
+    ports:
+      - 1521:1521
+  postgres:
+    image: postgres
+    container_name: "${PROJECT_NAME}-postgres"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-Admin123456!}
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2025-latest
+    container_name: "${PROJECT_NAME}-sqlserver"
+    ports:
+      - 1433:1433
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-Admin123456!}
+      MSSQL_PID: ${MSSQL_PID:-Express}
+      ACCEPT_EULA: ${ACCEPT_EULA:-Y}
+    restart: unless-stopped
+  sqlite:
+    image: alpine:latest
+    container_name: "${PROJECT_NAME}-sqlite3"
+    environment:
+      - DB_NAME=${DB_NAME:-northwind}
+    command: >
+      sh -c '
+      apk add --no-cache sqlite && 
+        mkdir -p /tmp &&
+        if [ ! -f "/tmp/init.sqlite3" ]; then
+          sqlite3 "/tmp/init.sqlite3" "CREATE TABLE IF NOT EXISTS tmp (id INTEGER);"
+          echo "Database $DB_NAME created successfully."
+        else
+          echo "Database $DB_NAME already exists. Skipping creation."
+        fi &&
+        tail -f /dev/null
+      '
+    volumes:
+    - ./databases/northwind/sqlite:/tmp
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./databases
+          target: /apps
+  adminer:
+    image: adminer
+    container_name: "${PROJECT_NAME}-adminer"
+    restart: unless-stopped
+    environment:
+      ADMINER_PLUGINS: "tables-filter tinymce"
+    ports:
+      - 8022:8080
+    depends_on:
+      - mysql57
+      - mysql8
+      - mariadb
+      - postgres
+      - sqlite
+      - sqlserver
+      - oracle
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: "${PROJECT_NAME}-phpmyadmin"
+    depends_on:
+      - mysql8
+      - mysql57
+    environment:
+      PMA_HOST: ${PROJECT_NAME}-mysql
+      PMA_PORT: 3306
+      PMA_ARBITRARY: 1
+    restart: unless-stopped
+    ports:
+      - ${PHPMYADMIN_PORT:-8765}:80
+  cloudbeaver:
+    image: dbeaver/cloudbeaver:latest
+    container_name: ${PROJECT_NAME}-cloudbeaver
+    ports:
+      - 8978:8978
+    depends_on:
+      - sqlserver
+      - oracle
+    restart: unless-stopped
+  pgadmin4:
+    image: dpage/pgadmin4:latest
+    container_name: ${PROJECT_NAME}-pgadmin4
+    ports:
+      - 5050:80
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
