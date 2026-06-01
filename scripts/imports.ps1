@@ -37,8 +37,10 @@ Write-Host "`n[1/4] Importation SQL Server..." -ForegroundColor DarkCyan
 $SqlFile = Join-Path $TmpDir "northwind_sqlserver.sql"
 try {
     Download-File $DriveFiles["sqlserver"] $SqlFile
-    sqlcmd -S $Config.SQLServer.Server -U $Config.SQLServer.User -P $Config.SQLServer.Pass -Q "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'Northwind') CREATE DATABASE Northwind"
-    sqlcmd -S $Config.SQLServer.Server -U $Config.SQLServer.User -P $Config.SQLServer.Pass -d $Config.SQLServer.Database -i $SqlFile
+    sqlcmd -S $Config.SQLServer.Server -U $Config.SQLServer.User -P $Config.SQLServer.Pass -C -Q "IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'Northwind') CREATE DATABASE Northwind"
+
+    sqlcmd -S $Config.SQLServer.Server -U $Config.SQLServer.User -P $Config.SQLServer.Pass -d $Config.SQLServer.Database -C -i $SqlFile
+    
     Write-Host "[OK] SQL Server importe avec succes." -ForegroundColor Green
 } catch {
     Write-Error "Echec de l'import SQL Server : $_"
