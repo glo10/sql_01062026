@@ -1,22 +1,5 @@
 # Maîtriser le SQL
 
-## Import base de données RATP
-
-1YopTNcUU7o2B9m5mKyeCh13yTmmUlypN
-1. Téléchargez la base de données depuis ce lien [RATP](https://docs.google.com/uc?export=download&id=1YopTNcUU7o2B9m5mKyeCh13yTmmUlypN)
-2. Ouvrez powershell
-3. Tapez la commande suivante
-```bash
-mysql -u root -p
-```
-4. Saisissez le mot de passe ***root***
-5. Tapez les commandes SQL suivantes :
-```sql
-CREATE DATABASE ratp;
-use ratp;
-source C:/Users/PLB/Downloads/ratp.sql;
-```
-
 ## Google Forms
 
 1. Le rythme de la formation vous convient il ?
