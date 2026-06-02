@@ -13,6 +13,7 @@ SELECT societe, pays, ville
 FROM clients
 ORDER BY 2, 3;
 -- 4. Affichez le nom et commission des employés triés par commission.
+-- SELON les SBGDR les NULL appraissent soit tout au début soit tout à la fin
 SELECT nom, commission
 FROM employes
-ORDER BY commission;
+ORDER BY commission DESC;
