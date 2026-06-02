@@ -1,13 +1,5 @@
 # Maîtriser le SQL
 
-## Variables d'environnement
-
-- C:\Program Files\PostgreSQL\18\bin
-- C:\Program Files\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQL\Binn
-- C:\Program Files\MariaDB 12.2\bin
-
----
-
 ## Google Forms
 
 1. Le rythme de la formation vous convient il ?
