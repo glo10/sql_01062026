@@ -37,8 +37,8 @@ MODIFY code_postal CHAR(5) NULL;
 -- Ces colonnes sont des nombres flottants avec une partie entière à 2 chiffres.
 ALTER TABLE LOCALISATION
 ADD (
-    longitude NUMBER(8,2) DEFAULT 42.5545844,
-    latitude NUMBER(8,2) DEFAULT 2.14555448
+    longitude NUMBER(10,8) DEFAULT 42.5545844,
+    latitude NUMBER(10,8) DEFAULT 2.14555448
 );
 -- 11. Supprimez la colonne province de la table localisation.
 ALTER TABLE LOCALISATION
