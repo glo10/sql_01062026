@@ -5,3 +5,11 @@ manager.NOM nomSuperieur,
 manager.PRENOM prenomSuperieur
 FROM employes emp, employes manager
 WHERE emp.REND_COMPTE = manager.NO_EMPLOYE;
+-- Avec la notation JOIN ON
+SELECT emp.NOM nomEmploye,
+emp.prenom prenomEmp,
+manager.NOM nomSuperieur,
+manager.PRENOM prenomSuperieur
+FROM employes emp
+JOIN employes manager
+ON emp.REND_COMPTE = manager.NO_EMPLOYE;
