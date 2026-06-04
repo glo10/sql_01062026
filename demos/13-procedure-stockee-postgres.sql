@@ -1,8 +1,10 @@
--- Création d'une procédure stockée (idéale pour des tâches recurrentes et la
--- maintenace)
--- 1. Définir les frontières de la porécédure stockée avec DELIMITER
--- Permet d'indiquer que l'ensemble de ce qui est à l'intérieur est un bloc d'instuctions
+-- Suppression de la procédure stockée
+DROP PROCEDURE calculerLaMoyenneSalaire;
 
+-- Création d'une procédure stockée (idéale pour des tâches récurrentes et la maintenance
+-- 1. Définir les frontières de la procédure stockée avec LANGUAGE plpgsql AS $$ 
+-- Permet d'indiquer que l'ensemble de ce qui est à l'intérieur est un bloc d'instuctions à exécuter
+-- 2. Exécuter vos instructions SQL (SELECT, INSERT, UPDATE, etc.)
 CREATE PROCEDURE calculerLaMoyenneSalaire()
   LANGUAGE plpgsql AS $$ -- ici $$ délimiteur
   -- Début de la procédure
@@ -14,23 +16,14 @@ CREATE PROCEDURE calculerLaMoyenneSalaire()
   END;
 $$;
 
--- Appel de la procédure
-
+-- Appels de la procédure
 CALL calculerLaMoyenneSalaire();
 CALL calculerLaMoyenneSalaire();
 CALL calculerLaMoyenneSalaire();
 
 --- Procédure avec les paramètres
-
--- Suppression de la procédure stockée
-DROP PROCEDURE calculerLaMoyenneSalaire;
--- Création d'une procédure stockée (idéale pour des tâches recurrentes et la
--- maintenace)
--- 1. Définir les frontières de la porécédure stockée avec DELIMITER
--- Permet d'indiquer que l'ensemble de ce qui est à l'intérieur est un bloc d'instuctions
 CREATE calculerLaMoyenneSalaireParTitre(titreRecherche VARCHAR(255))
   LANGUAGE plpgsql AS $$
-  -- Début de la procédure
   BEGIN
     SELECT AVG(salaire)
     FROM employes
@@ -42,7 +35,6 @@ CREATE calculerLaMoyenneSalaireParTitre(titreRecherche VARCHAR(255))
   END;
 $$;
 
--- Appel de la procédure
 CALL calculerLaMoyenneSalaireParTitre("Mme");
 CALL calculerLaMoyenneSalaireParTitre("Mlle");
 CALL calculerLaMoyenneSalaireParTitre("M.");

@@ -1,12 +1,12 @@
 -- Suppression de la procédure stockée
 DROP PROCEDURE calculerLaMoyenneSalaire;
--- Création d'une procédure stockée (idéale pour des tâches recurrentes et la
--- maintenace)
+-- Création d'une procédure stockée (idéale pour des tâches récurrentes et la maintenance)
 -- 1. Définir les frontières de la porécédure stockée avec DELIMITER
 -- Permet d'indiquer que l'ensemble de ce qui est à l'intérieur est un bloc d'instuctions
+-- 2. Exécuter vos instructions SQL (SELECT, INSERT, UPDATE, etc.)
 DELIMITER //
 CREATE PROCEDURE calculerLaMoyenneSalaire()
--- Débit de la procédure
+-- Début de la procédure
 BEGIN
   SELECT AVG(salaire)
   FROM employes;
@@ -15,23 +15,17 @@ BEGIN
 END //
 DELIMITER ;
 
--- Appel de la procédure
-
+-- Appels de la procédure
 CALL calculerLaMoyenneSalaire();
 CALL calculerLaMoyenneSalaire();
 CALL calculerLaMoyenneSalaire();
-
---- Procédure avec les paramètres
 
 -- Suppression de la procédure stockée
-DROP PROCEDURE calculerLaMoyenneSalaire;
--- Création d'une procédure stockée (idéale pour des tâches recurrentes et la
--- maintenace)
--- 1. Définir les frontières de la porécédure stockée avec DELIMITER
--- Permet d'indiquer que l'ensemble de ce qui est à l'intérieur est un bloc d'instuctions
+DROP PROCEDURE calculerLaMoyenneSalaireParTitre;
+--- Procédure avec les paramètres
 DELIMITER //
 CREATE PROCEDURE calculerLaMoyenneSalaireParTitre(IN titreRecherche VARCHAR(255))
--- Débit de la procédure
+-- Début de la procédure
 BEGIN
   SELECT AVG(salaire)
   FROM employes
@@ -42,8 +36,6 @@ BEGIN
   SELECT * FROM employes WHERE titre = titreRecherche;
 END //
 DELIMITER ;
-
--- Appel de la procédure
 
 CALL calculerLaMoyenneSalaireParTitre("Mme");
 CALL calculerLaMoyenneSalaireParTitre("Mlle");
