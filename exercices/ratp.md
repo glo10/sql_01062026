@@ -15,7 +15,6 @@
 ## Contexte
 
 Agence de location *Drive Rental* située à Paris souhaite avoir les informations suivantes en s'appuyant sur votre expertise dans les bases de données pour sa filiale d'auto-partage *Drive Share* qui met à disposition des véhicules pour le covoiturage à proximité des gares de la région parisienne.
-Pour chaque demande, vous devez rédiger et stocker la requête SQL et prendre une capture d'écran du résultat retourné par votre base de données.
 
 ---
 
@@ -57,7 +56,6 @@ Pour chaque demande, vous devez rédiger et stocker la requête SQL et prendre u
 
 
 Toujours dans le cadre de l'étude de marché pour *Drive Rental Paris*, vous devez envoyer aux clients les réponses aux questions suivantes.
-Pour chaque réponse, vous devez stocker la requête SQL permettant de répondre à la question.
 
 1. Les 10 stations les plus fréquentées ces 3 dernières années (de 2019 à 2021)
 2. Les 5 stations les moins fréquentées dans Paris entre 2018 et 2021.
