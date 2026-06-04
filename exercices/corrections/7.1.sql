@@ -13,17 +13,25 @@ WHERE unites_stock > (
 	FROM produits
 	WHERE code_categorie = 3
 );
+-- Ou bien
+SELECT ref_produit
+FROM produits
+WHERE unites_stock > ALL (
+	SELECT unites_stock
+	FROM produits
+	WHERE code_categorie = 3
+);
 -- 3. Affichez la liste des produits que les clients parisiens ne commandent pas.
 -- Toutes bases de données
 SELECT ref_produit
 FROM produits
 WHERE ref_produit NOT IN (
-		SELECT ref_produit
-		FROM details_commandes dc, commandes cmd, clients cl
-        WHERE dc.no_commande = cmd.no_commande
-        AND cmd.code_client = cl.code_client
-		AND LOWER(ville) = "paris"
-	);
+	SELECT ref_produit
+	FROM details_commandes dc, commandes cmd, clients cl
+	WHERE dc.no_commande = cmd.no_commande
+	AND cmd.code_client = cl.code_client
+	AND LOWER(ville) = "paris"
+);
 -- ORACLE
 SELECT ref_produit
 FROM produits
