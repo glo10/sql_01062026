@@ -3,7 +3,7 @@
 -- 1. Définir les frontières de la porécédure stockée avec DELIMITER
 -- Permet d'indiquer que l'ensemble de ce qui est à l'intérieur est un bloc d'instuctions
 
-CREATE OR REPLACE PROCEDURE calculerLaMoyenneSalaire()
+CREATE PROCEDURE calculerLaMoyenneSalaire()
   LANGUAGE plpgsql AS $$ -- ici $$ délimiteur
   -- Début de la procédure
   BEGIN
@@ -28,7 +28,7 @@ DROP PROCEDURE calculerLaMoyenneSalaire;
 -- maintenace)
 -- 1. Définir les frontières de la porécédure stockée avec DELIMITER
 -- Permet d'indiquer que l'ensemble de ce qui est à l'intérieur est un bloc d'instuctions
-CREATE OR PROCEDURE calculerLaMoyenneSalaireParTitre(titreRecherche VARCHAR(255))
+CREATE calculerLaMoyenneSalaireParTitre(titreRecherche VARCHAR(255))
   LANGUAGE plpgsql AS $$
   -- Début de la procédure
   BEGIN
