@@ -12,7 +12,7 @@ SELECT
 FROM clients c
 JOIN commandes o ON c.code_client = o.code_client
 JOIN details_commandes dc ON o.no_commande = dc.no_commande
-GROUP BY c.code_client, c.SOCIETE
+GROUP BY c.code_client, c.societe
 HAVING SUM(dc.prix_unitaire * dc.quantite * (1 - dc.remise)) > 500000
 ORDER BY TotalAchats DESC;
 -- Avec frais de port
@@ -23,6 +23,17 @@ SELECT
 FROM clients c
 JOIN commandes o ON c.code_client = o.code_client
 JOIN details_commandes dc ON o.no_commande = dc.no_commande
-GROUP BY c.code_client, c.SOCIETE
+GROUP BY c.code_client, c.societe
+HAVING SUM((dc.prix_unitaire * dc.quantite * (1 - dc.remise)) + PORT) > 500000
+ORDER BY TotalAchats DESC;
+-- Avec une sous-requête
+SELECT 
+    c.code_client, 
+    c.societe,
+    ROUND(SUM((dc.prix_unitaire * dc.quantite * (1 - dc.remise)) + PORT) , 2) AS TotalAchats
+FROM clients c
+JOIN commandes o ON c.code_client = o.code_client
+JOIN details_commandes dc ON o.no_commande = dc.no_commande
+GROUP BY c.code_client, c.societe
 HAVING SUM((dc.prix_unitaire * dc.quantite * (1 - dc.remise)) + PORT) > 500000
 ORDER BY TotalAchats DESC;
