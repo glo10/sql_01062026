@@ -25,10 +25,10 @@ Agence de location *Drive Rental* située à Paris souhaite avoir les informatio
 1. Toutes les villes différentes de Paris qui dispose d'un station de Métro ou RER.
 2. Les stations qui ont une fréquentation entre *5 000 000* et *10 000 000* de passager annuel.
 3. Quel est le nombre total du trafic annuel de toutes les stations ?
-4. Le nombre total des stations par Arrondissement de Paris dans l'ordre décroissant (du plus grand au plus pétit) ?
+4. Le nombre total des stations par Arrondissement de Paris dans l'ordre décroissant ?
 5. Quel est le nombre total des stations de Métro ?
 6. Quel est le nombre total des stations de RER ?
-7. Tous les noms des stations des villes suivantes :  Bobigny, La courneuve, Saint Denis, Pantin, Montreuil et Bagnolet trié par le nom de la ville croissante (de A à Z)
+7. Tous les noms des stations des villes suivantes :  Bobigny, La courneuve, Saint Denis, Pantin, Montreuil et Bagnolet triées par le nom de la ville croissante
 8. Toutes les informations concernant les stations de la ville de Vincennes.
 9. Toutes les stations qui commencent par "porte" triées par ordre décroissant (de Z à A).
 10. Les stations qui ont une correspondance avec le RER B qui mène vers les aéroports.
@@ -73,7 +73,7 @@ Toujours dans le cadre de l'étude de marché pour *Drive Rental Paris*, vous de
 ## PARTIE IV : LDD
 
 1. Créez une nouvelle table 2025 ayant les mêmes colonnes que les tables précédentes 2021, 2020, etc.
-2. Ajoutez toutes les stations à partie de la table 2021 dans la table 2025 en utilisation la clause  `INSERT INTO SELECT FROM...`
+2. Ajoutez toutes les stations à partir de la table 2021 dans la table 2025 en utilisation la clause  `INSERT INTO SELECT FROM...`
 3. Ajoutez toutes les nouvelles stations depuis 2021 dans la table 2025, pour simplifier nous n'allons pas prendre en compte le trafic et les correspondances (connections)
 -  Nouvelles stations de la ligne 4
     - Barbara
