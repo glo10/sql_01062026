@@ -7,7 +7,7 @@ SELECT *
 FROM (
     SELECT titre, salaire
     FROM employes
-) AS source
+) AS SRC
 PIVOT (
     SUM(salaire) FOR titre IN ([DR.], [Mlle], [Mme.])
-) AS pivotTable;
+) AS PVT;
